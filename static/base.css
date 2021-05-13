@@ -1,0 +1,55 @@
+body {
+  margin: 0em;
+  width: 100vw;
+  height: 100vh;
+}
+.grid {
+  display: grid;
+  height: 100%;
+  grid-template-rows: 1fr 10fr 1fr;
+  
+}
+header {
+  display: grid;
+  place-items: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 1px;
+  background-color: aquamarine;
+}
+header div {
+  width: 20%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-left: 80%;
+}
+footer {
+  display: grid;
+  place-items: center;
+}
+div form {
+  display: grid;
+  place-items: center;
+  height: 70%;
+}
+div form input,
+div form button {
+  border-radius: 25px;
+  outline: none;
+  font-size: 2em;
+}
+div form button {
+  width: 20%;
+  height: 100%;
+  background-color: none;
+  color: black;
+  cursor: pointer;
+}
+div form button:hover {
+  background-color: aquamarine;
+}
+div form input {
+  width: 40%;
+  height: 100%;
+}
