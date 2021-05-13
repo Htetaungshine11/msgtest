@@ -9,7 +9,7 @@
   remotepeer = [];
   const username = document.getElementById("username").value;
   const wc = new WebSocket(
-    "ws://" + window.location.host + window.location.pathname
+    "wss://" + window.location.host + window.location.pathname
   );
 
   wc.onmessage = function (e) {
