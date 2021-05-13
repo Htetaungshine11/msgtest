@@ -21,7 +21,7 @@ from websocket.routing import app
 
 application = ProtocolTypeRouter(
     {
-        "https":a,
+        "http":a,
         "websocket":AuthMiddlewareStack(
             URLRouter(
                 app
