@@ -7,18 +7,26 @@
 <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
 <script>
   remotepeer = [];
+  checkid = "";
   const username = document.getElementById("username").value;
   const wc = new WebSocket(
     "wss://" + window.location.host + window.location.pathname
   );
-
+  navigator.mediaDevices
+    .getUserMedia({ video: true, audio: false })
+    .then(function (e) {
+      v = document.createElement("video");
+      vd = document.querySelector("#vd");
+      vd.appendChild(v);
+      v.srcObject = e;
+      v.play();
+    });
   wc.onmessage = function (e) {
     event = e.data.split("\\")[0];
     data = e.data.split("\\")[1];
 
     if (event == "anum") {
       userlist = JSON.parse(data.split("//")[1]);
-      unum = data.split("//")[0];
 
       var filtered = userlist.filter(function (value, index, arr) {
         return value.username != username;
@@ -30,15 +38,18 @@
         peer.on("call", function (call) {
           console.log("call received");
           navigator.mediaDevices
-            .getUserMedia({ video: true, audio: false })
+            .getUserMedia({ video: true, audio: true })
             .then(function (stream) {
               call.answer(stream);
               call.on("stream", function (e) {
-                v = document.createElement("video");
-                vd = document.querySelector("#vd");
-                vd.appendChild(v);
-                v.srcObject = e;
-                v.play();
+                if (checkid != e.id) {
+                  checkid = e.id;
+                  v = document.createElement("video");
+                  vd = document.querySelector("#vd");
+                  vd.appendChild(v);
+                  v.srcObject = e;
+                  v.play();
+                }
               });
             });
         });
@@ -57,15 +68,18 @@
         var peer = remotepeer[remotepeer.length - 1];
         setTimeout(function () {
           navigator.mediaDevices
-            .getUserMedia({ video: true, audio: false })
+            .getUserMedia({ video: true, audio: true })
             .then(function (stream) {
               call = peer.call(peerid, stream);
               call.on("stream", function (e) {
-                v = document.createElement("video");
-                vd = document.querySelector("#vd");
-                vd.appendChild(v);
-                v.srcObject = e;
-                v.play();
+                if (checkid != e.id) {
+                  checkid = e.id;
+                  v = document.createElement("video");
+                  vd = document.querySelector("#vd");
+                  vd.appendChild(v);
+                  v.srcObject = e;
+                  v.play();
+                }
               });
             });
         }, 1500);
