@@ -3,7 +3,7 @@
 <h2>{{request.user.username}}</h2>
 <input type="hidden" name="" id="username" value="{{request.user.username}}" />
 <div id="vd"></div>
-<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+
 <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
 <script>
   remotepeer = [];
@@ -82,7 +82,7 @@
                 }
               });
             });
-        }, 1500);
+        }, 2500);
       }
     } else if (event == "") {
     }
